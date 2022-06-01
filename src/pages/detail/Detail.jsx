@@ -1,0 +1,38 @@
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import tmdbApi from '../../api/tmdbApi';
+import apiConfig from '../../api/apiConfig';
+
+const Detail = () => {
+
+  const {category, id} = useParams();
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    const params = {};
+
+    const getDetail = async () => {
+      const response = await tmdbApi.detail(category, id, {params});
+      setItem (response);
+      window.scrollTo(0,0);
+    }
+
+    getDetail();
+  
+  }, [category, id])
+  
+  return (
+    <>
+      {
+        item && (
+          <div className="banner" style={{backgroundImage: `url(${apiConfig.originalImage(item.backdrop_path || item.poster_path)})`}}>
+            
+          </div>
+        )
+      }
+    </>
+  )
+}
+
+export default Detail
