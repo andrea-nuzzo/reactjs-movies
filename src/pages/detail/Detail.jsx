@@ -40,10 +40,16 @@ const Detail = () => {
                 </div>
                 <div className="genres">
                   {
-                    item.genres && item.genres.slice(0,5).map((genre, index) => {
-                      
-                    })
+                    item.genres && item.genres.slice(0,5).map((genre, index) => (
+                      <span key={index}>{genre.name}</span>
+                    ))
                   }
+                </div>
+                <p className="overview">{item.overview}</p>
+                <div className="cast">
+                  <div className="section__header">
+                    <h2>Casts</h2>
+                  </div>
                 </div>
               </div>
             </div>
