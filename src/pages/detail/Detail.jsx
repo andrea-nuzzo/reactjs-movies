@@ -5,6 +5,9 @@ import tmdbApi from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 
 import './detail.scss';
+import Cast from './Cast';
+import VideoList from './VideoList';
+import MovieList from '../../components/movie-list/MovieList';
 
 const Detail = () => {
 
@@ -35,13 +38,13 @@ const Detail = () => {
                 <div className="movie-content__poster__img" style={{backgroundImage: `url(${apiConfig.originalImage(item.poster_path || item.backdrop_path)})`}}></div>
               </div>
               <div className="movie-content__info">
-                <div className="title">
+                <h1 className="title">
                   {item.title || item.name}
-                </div>
+                </h1>
                 <div className="genres">
                   {
                     item.genres && item.genres.slice(0,5).map((genre, index) => (
-                      <span key={index}>{genre.name}</span>
+                      <span key={index} className="genres__item">{genre.name}</span>
                     ))
                   }
                 </div>
@@ -50,7 +53,19 @@ const Detail = () => {
                   <div className="section__header">
                     <h2>Casts</h2>
                   </div>
+                    <Cast id={item.id}/>
                 </div>
+              </div>
+            </div>
+            <div className="container">
+              <div className="section mb-3">
+                <VideoList id={item.id}/>
+              </div>
+              <div className="section mb-3">
+                <div className="section__header mb-2">
+                  <h2>Similar</h2>
+                </div>
+                <MovieList category={category} type="similar" id={item.id}/>
               </div>
             </div>
           </>
